@@ -1,0 +1,17 @@
+{
+  "name": "bcc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^17.2.0",
+    "@cypress/webpack-preprocessor": "^5.17.1",
+    "cypress": "^12.13.0",
+    "cypress-fill-command": "^1.0.2"
+  }
+}
