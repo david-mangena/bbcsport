@@ -7,11 +7,11 @@ const loginPage = new LoginPage();
 
 
 context('Wrong username and password',()=>{
-    Given(/^I am on the login page$/,()=>{
+    Given("I am on the login page",()=>{
         loginPage.signinPage();
     });
     
-    When(/^I enter wrong username and password$/,()=>{
+    When("I enter wrong username and password",()=>{
         cy.fixture("users.json").then((user)=>{
             loginPage.enterUsername(user.username);
             loginPage.enterPassword(user.password);
@@ -19,65 +19,67 @@ context('Wrong username and password',()=>{
         });
     });
     
-    Then(/^error message should be displayed$/,()=>{
+    Then("error message should be displayed",()=>{
         loginPage.error_message_general('be.visible');
     });
     
-    Then(/^the error message should contain "username or password is wrong"$/,()=>{
-        loginPage.error_form_message_text_contains('username or password is wrong');
+    Then("the error message contain {string}",(error_message_text)=>{
+        loginPage.error_form_message_text_contains(error_message_text);
     });
 })
 
 context('Enter blank username and password',()=>{
-    Given(/^Am on the login page$/,()=>{
+    Given("Am on the login page",()=>{
         loginPage.signinPage();
     });
     
-    When(/^I click submit button$/, ()=>{
+    When("I click submit button", ()=>{
         loginPage.clickSubmitBtn();
     });
     
-    Then(/^the error messages should be displayed$/, ()=>{
+    Then("the error messages should be displayed", ()=>{
+        loginPage.error_message_general('be.visible');
         loginPage.error_form_message_username('be.visible');
         loginPage.error_form_message_password('be.visible');
     });
     
-    Then(/^the error message should contain "Something's missing"$/,()=>{
-        loginPage.error_message_text_contains("Something's missing");
+    Then("the error message should contain {string}",(error__message_text)=>{
+        loginPage.error_message_general_text(error__message_text);
     });
     
-    Then(/^the error message should contain "don't match"$/,()=>{
-        loginPage.error_form_message_general_contains("don't match");
+    Then("the error messages should contain {string}",(error__message_txt)=>{
+        loginPage.error_message_password_contains(error__message_txt);
+        loginPage.error_message_username_contains(error__message_txt);
     });
 })
 
 context('Enter invalid username',()=>{
-    Given(/^I am on the SignIn page$/,()=>{
+    Given("I am on the SignIn page",()=>{
         loginPage.signinPage();
     });
 
-    When(/^I enter an invalid username$/, ()=>{
+    When("I enter an invalid username", ()=>{
         cy.fixture("users.json").then((user)=>{
             loginPage.enterUsername(user.invalidusername); 
             loginPage.clickSubmitBtn();
         });
     });
 
-    Then(/^the error message is displayed$/,()=>{
+    Then("the error message is displayed",()=>{
         loginPage.error_form_message_username('be.visible');
     });
 
-    Then(/^the error message should contain "Usernames"$/,()=>{
-        loginPage.error__message_text_contains("Usernames can only include...");
+    Then("check error message contain {string}",(error_msg_text)=>{
+        loginPage.error__message_text_contains(error_msg_text);
     });
 })
 
 context('Enter short password',()=>{
-    Given(/^Am on the SignIn page$/,()=>{
+    Given("Am on the SignIn page",()=>{
         loginPage.signinPage();
     });
 
-    When(/^I enter a short password$/, ()=>{
+    When("I enter a short password", ()=>{
         cy.fixture("users.json").then((user)=>{
             loginPage.enterUsername(user.username);
             loginPage.enterPassword(user.shortpassword)
@@ -85,11 +87,11 @@ context('Enter short password',()=>{
         });
     });
 
-    Then(/^error message is displayed$/,()=>{
+    Then("error message is displayed",()=>{
         loginPage.error_form_message_password('be.visible');
     });
 
-    Then(/^the error message should contain "password is too short"$/,()=>{
-        loginPage.error__message_text_contains("password is too short");
+    Then("check error message contains {string}",(error_msg_txt)=>{
+        loginPage.error__message_text_contains(error_msg_txt);
     });
 })

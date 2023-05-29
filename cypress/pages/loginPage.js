@@ -20,6 +20,10 @@ export class LoginPage{
         cy.get('#form-message-general').should(text);
     }
 
+    error_message_general_text(text){
+        cy.get('#form-message-general > .form-message__text').contains(text);
+    }
+
     error_form_message_text_contains(text){
         cy.get('.form-message__text > :nth-child(1) > span').contains(text);
 
@@ -38,12 +42,12 @@ export class LoginPage{
         cy.get('#form-message-password').should(text);
     }
 
-    error_message_text_contains(text){
+    error_message_username_contains(text){
         cy.get('#form-message-username > .form-message__text > :nth-child(1) > :nth-child(1)').contains(text);
 
     }
 
-    error_form_message_general_contains(text){
-        cy.get('#form-message-general > .form-message__text > :nth-child(1) > :nth-child(3)').contains(text);
+    error_message_password_contains(text){
+        cy.get('#form-message-password > .form-message__text > :nth-child(1) > :nth-child(1)').contains(text);
     }
 }
