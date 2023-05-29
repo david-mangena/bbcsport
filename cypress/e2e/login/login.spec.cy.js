@@ -2,7 +2,9 @@
 
 import {Given, When, Then} from "@badeball/cypress-cucumber-preprocessor";
 import { LoginPage } from "../../pages/loginPage";
+
 const loginPage = new LoginPage();
+
 
 context('Wrong username and password',()=>{
     Given(/^I am on the login page$/,()=>{
@@ -10,9 +12,11 @@ context('Wrong username and password',()=>{
     });
     
     When(/^I enter wrong username and password$/,()=>{
-        loginPage.enterUsername('dvdmangena@gmail.com');
-        loginPage.enterPassword('Playdav31');
-        loginPage.clickSubmitBtn();
+        cy.fixture("users.json").then((user)=>{
+            loginPage.enterUsername(user.username);
+            loginPage.enterPassword(user.password);
+            loginPage.clickSubmitBtn();
+        });
     });
     
     Then(/^error message should be displayed$/,()=>{
@@ -53,8 +57,10 @@ context('Enter invalid username',()=>{
     });
 
     When(/^I enter an invalid username$/, ()=>{
-       loginPage.enterUsername('dvdmangenagmail.com'); 
-       loginPage.clickSubmitBtn();
+        cy.fixture("users.json").then((user)=>{
+            loginPage.enterUsername(user.invalidusername); 
+            loginPage.clickSubmitBtn();
+        });
     });
 
     Then(/^the error message is displayed$/,()=>{
@@ -72,8 +78,10 @@ context('Enter short password',()=>{
     });
 
     When(/^I enter a short password$/, ()=>{
-        loginPage.enterPassword("Playda")
-        loginPage.clickSubmitBtn();
+        cy.fixture("users.json").then((user)=>{
+            loginPage.enterPassword(user.shortpassword)
+            loginPage.clickSubmitBtn();
+        });
     });
 
     Then(/^error message is displayed$/,()=>{
