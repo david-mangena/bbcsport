@@ -9,7 +9,7 @@ export class LoginPage{
     }
 
     enterPassword(text){
-        cy.get('#password-input').type('@Playdav31');
+        cy.get('#password-input').type(text);
     }
 
     clickSubmitBtn(){

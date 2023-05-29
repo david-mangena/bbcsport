@@ -79,6 +79,7 @@ context('Enter short password',()=>{
 
     When(/^I enter a short password$/, ()=>{
         cy.fixture("users.json").then((user)=>{
+            loginPage.enterUsername(user.username);
             loginPage.enterPassword(user.shortpassword)
             loginPage.clickSubmitBtn();
         });

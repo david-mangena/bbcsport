@@ -20,8 +20,8 @@ Feature: Verify negative scenarios for login
     Then the error message is displayed
     Then the error message should contain "Usernames"
 
-  #   Scenario: Enter short password
-  #   When I enter a short password
-  #   Then error message is displayed
-  #   Then the error message should contain "password is too short"
+    Scenario: Enter short password
+    When I enter a short password
+    Then error message is displayed
+    Then the error message should contain "password is too short"
 
